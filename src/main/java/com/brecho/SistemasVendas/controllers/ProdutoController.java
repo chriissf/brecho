@@ -20,11 +20,15 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoDto>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
-    @PostMapping("/produtos/lote")
+
+
+
+
+   /* @PostMapping("/produtos/lote")
     public ResponseEntity<?> salvarLote(@RequestBody List<@Valid ProdutoDto> produtos) {
         List<ProdutoDto> salvos = service.salvarLote(produtos);
         return ResponseEntity.status(201).body(salvos);
-    }
+    }*/
 
 
 

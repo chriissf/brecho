@@ -1,12 +1,13 @@
 package com.brecho.SistemasVendas.services;
 
+
 import com.brecho.SistemasVendas.dtos.ClienteDto;
 import com.brecho.SistemasVendas.entities.Cliente;
 import com.brecho.SistemasVendas.helpers.AppException;
 import com.brecho.SistemasVendas.repositories.ClienteRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -14,7 +15,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClienteService {
 
+
     private final ClienteRepository clienteRepository;
+
+
+
 
     // 🔍 Lista todos os clientes
     public List<Cliente> listarClientes() {
@@ -99,7 +104,7 @@ public class ClienteService {
 
     // 📝 Criar um novo cliente
     public Cliente criarCliente(Cliente cliente) {
-        // Salva o novo cliente no banco de dados
+
         return clienteRepository.save(cliente);
     }
 }

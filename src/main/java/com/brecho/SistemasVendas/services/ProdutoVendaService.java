@@ -1,5 +1,6 @@
 package com.brecho.SistemasVendas.services;
 
+import com.brecho.SistemasVendas.dtos.ProdutoDto;
 import com.brecho.SistemasVendas.dtos.ProdutoVendaDto;
 import com.brecho.SistemasVendas.entities.ProdutoVenda;
 import com.brecho.SistemasVendas.helpers.AppException;
@@ -7,6 +8,7 @@ import com.brecho.SistemasVendas.mappers.ProdutoVendaMapper;
 import com.brecho.SistemasVendas.repositories.ProdutoVendaRepositories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,11 +41,26 @@ public class ProdutoVendaService {
                 .toList();
     }
 
+    @Transactional
     public ProdutoVendaDto create(ProdutoVendaDto dto) {
         // Buscando as entidades a partir dos IDs fornecidos no DTO
         var cliente = clienteService.buscarPorId(dto.getClienteId());
         var produto = produtoService.findById(dto.getProdutoId());
         var venda = vendasService.findVendaById(dto.getVendaId());
+
+        // Verificando se o estoque é suficiente
+        if (produto.getEstoque() < dto.getQuantidade()) {
+            throw new AppException("Estoque insuficiente para o produto " + produto.getNome());
+        }
+
+        // Atualizando o estoque do produto após a venda
+        produto.setEstoque(produto.getEstoque() - dto.getQuantidade());
+
+        if (dto.getDesconto > 0)
+        produto.setPreco(produto.getPreco() - dto.getDesconto());
+
+        // Salvando o produto com o estoque atualizado
+        produtoService.update(produto.getId(), produtoService.mapper().convertEntityToDto(produto));
 
         // Criando a entidade ProdutoVenda
         var produtoVenda = new ProdutoVenda();
@@ -58,6 +75,7 @@ public class ProdutoVendaService {
         // Salvando e retornando a resposta mapeada para DTO
         return mapper.convertEntityToDto(produtoVendaRepositories.save(produtoVenda));
     }
+
 
     public ProdutoVendaDto update(Long id, ProdutoVendaDto dto) {
         // Validando se o ProdutoVenda existe

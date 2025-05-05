@@ -41,13 +41,21 @@ public class ProdutoServices {
                 .map(mapper::convertEntityToDto)
                 .collect(toList());
     }
-    public List<ProdutoDto> salvarLote(List<ProdutoDto> produtos) {
-        return produtos.stream()
-                .map(this::create) // Reutiliza o método que salva um ProdutoDto
-                .toList();
+
+    // Método para atualizar o estoque
+    public ProdutoDto atualizarEstoque(Long id, int quantidadeVendida) {
+        Produto produto = findById(id);
+
+        if (produto.getEstoque() < quantidadeVendida) {
+            throw new AppException("Estoque insuficiente para o produto " + produto.getNome());
+        }
+
+        // Atualiza o estoque
+        produto.setEstoque(produto.getEstoque() - quantidadeVendida);
+        return create(mapper.convertEntityToDto(produto));
     }
 
-
+    // Método para salvar produto - agora lida com o estoque
     public ProdutoDto create(ProdutoDto dto) {
         if (dto == null) {
             throw new AppException("O produto informado está nulo.");
@@ -55,10 +63,13 @@ public class ProdutoServices {
 
         log.info("Criando produto com dados: {}", dto);
         var entity = mapper.convertDtoToEntity(dto);
+
+        // Salva o produto (caso tenha sido alterado)
         var savedEntity = produtoRepository.save(entity);
         return mapper.convertEntityToDto(savedEntity);
     }
 
+    // Atualização de produto com verificação de estoque
     public ProdutoDto update(Long id, ProdutoDto dto) {
         if (id == null || dto == null) {
             throw new AppException("ID ou dados do produto são nulos.");

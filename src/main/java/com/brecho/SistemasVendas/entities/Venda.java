@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "vendas")
@@ -15,14 +16,17 @@ import java.util.Date;
 public class Venda {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Date date;
 
     @ManyToOne
     @JoinColumn(name = "pagamentos_id")
     private Pagamento pagamento;
+
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL) // Relacionamento com ProdutoVenda
+    private List<ProdutoVenda> produtosVendidos; // Lista de produtos vendidos
+
 
 }
