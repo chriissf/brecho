@@ -56,7 +56,7 @@ public class ProdutoVendaService {
         // Atualizando o estoque do produto após a venda
         produto.setEstoque(produto.getEstoque() - dto.getQuantidade());
 
-        if (dto.getDesconto > 0)
+        if (dto.getDesconto() > 0)
         produto.setPreco(produto.getPreco() - dto.getDesconto());
 
         // Salvando o produto com o estoque atualizado

@@ -24,7 +24,12 @@ public class Produto {
     private String nome;
     @Column(columnDefinition = "TEXT")
     private String descricaoDoProduto;
-    private String categoria;
+
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     private Double preco;
     private Integer estoque;
 

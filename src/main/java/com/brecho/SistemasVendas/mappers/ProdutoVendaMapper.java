@@ -21,6 +21,8 @@ public class ProdutoVendaMapper {
         var target = new ProdutoVenda();
         BeanUtils.copyProperties(source, target);
 
+
+
         // Buscando as entidades a partir dos IDs fornecidos no DTO
         target.setProduto(produtoService.findById(source.getProdutoId()));
         target.setVenda(vendasService.findVendaById(source.getVendaId()));

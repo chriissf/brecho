@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PagamentoDto {
+public class CategoriaDto {
+
     private Long id;
     @NotNull
-    private String descricao;
+    private String nome;
 }
