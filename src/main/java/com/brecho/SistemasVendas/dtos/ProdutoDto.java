@@ -17,7 +17,11 @@ public class ProdutoDto {
     private  String nome;
 
     private  String descricaoDoProduto;
-    private  String categoria;
+
+
+    private Long categoriaId;
+    private String nomeCategoria;
+
     private  Double preco;
 
     private  Integer estoque;

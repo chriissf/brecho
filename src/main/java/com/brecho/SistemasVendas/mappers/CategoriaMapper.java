@@ -12,7 +12,7 @@ public class CategoriaMapper {
     public Categoria convertDtoToEntity(CategoriaDto source){
 
         var categoria = new Categoria();
-        BeanUtils.copyProperties(categoria ,source);
+        BeanUtils.copyProperties( source, categoria);
         return categoria;
     }
 
@@ -20,7 +20,7 @@ public class CategoriaMapper {
     public CategoriaDto convertEntityToDto(Categoria dto){
 
         var categoriaDto = new CategoriaDto();
-        BeanUtils.copyProperties(categoriaDto, dto);
+        BeanUtils.copyProperties(dto, categoriaDto);
         return categoriaDto;
     }
 

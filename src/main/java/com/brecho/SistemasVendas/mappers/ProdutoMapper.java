@@ -20,6 +20,11 @@ public class ProdutoMapper {
 
         var produto = new ProdutoDto();
         BeanUtils.copyProperties(source, produto);
+
+        if(source.getCategoria()!=null){
+            produto.setCategoriaId(source.getCategoria().getId());
+            produto.setNomeCategoria(source.getCategoria().getNome());
+        }
         return produto;
 
 
