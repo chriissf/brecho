@@ -20,6 +20,7 @@ public class ProdutoServices {
 
     private final ProdutoRepository produtoRepository;
     private final ProdutoMapper mapper;
+    private final CategoriaService categoriaService;
 
     public Produto findById(Long id) {
         if (id == null) {
@@ -62,7 +63,14 @@ public class ProdutoServices {
         }
 
         log.info("Criando produto com dados: {}", dto);
+        //  Verifica se a categoria existe
+
+        var categoria = categoriaService.findById(dto.getCategoriaId());
+        // Garante que existe
         var entity = mapper.convertDtoToEntity(dto);
+
+        // Associa a categoria ao produto
+        entity.setCategoria(categoria);
 
         // Salva o produto (caso tenha sido alterado)
         var savedEntity = produtoRepository.save(entity);
@@ -76,9 +84,20 @@ public class ProdutoServices {
         }
 
         log.info("Atualizando produto ID {} com dados: {}", id, dto);
+
+
         var existing = findById(id);
+
+
+        // Validação da categoria
+        var categoria = categoriaService.findById(dto.getCategoriaId());
+
         var entity = mapper.convertDtoToEntity(dto);
         entity.setId(existing.getId());
+       // Associa a categoria correta
+        entity.setCategoria(categoria);
+
+
         var updated = produtoRepository.save(entity);
         return mapper.convertEntityToDto(updated);
     }

@@ -7,6 +7,7 @@ import com.brecho.SistemasVendas.helpers.AppException;
 import com.brecho.SistemasVendas.repositories.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -23,9 +24,13 @@ public class ClienteService {
 
     // 🔍 Lista todos os clientes
     public List<Cliente> listarClientes() {
+
+
         return clienteRepository.findAll();
     }
 
+
+    @Transactional
     // 🔍 Cria e retorna um ClienteDto
     public ClienteDto create(ClienteDto dto) {
         // Converte o DTO para a entidade Cliente
@@ -51,13 +56,16 @@ public class ClienteService {
         return retorno;
     }
 
-    // Processa um lote de ClienteDto e os salva
+   // Processa um lote de ClienteDto e os salva
     public List<ClienteDto> salvarLote(List<ClienteDto> dtos) {
         return dtos.stream()
                 .map(this::create) // Reutiliza o método que cria um ClienteDto
                 .toList();
+
     }
 
+
+    @Transactional
     // 💾 Salva um novo cliente
     public void salvar(Cliente cliente) {
         clienteRepository.save(cliente);
@@ -93,7 +101,7 @@ public class ClienteService {
         return clienteRepository.findByEmail(email)
                 .orElseThrow(() -> new AppException("Cliente com e-mail " + email + " não encontrado."));
     }
-
+    @Transactional
     // ❌ Deleta cliente por ID
     public void deletarCliente(Long id) {
         if (!clienteRepository.existsById(id)) {
@@ -102,6 +110,7 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
+    @Transactional
     // 📝 Criar um novo cliente
     public Cliente criarCliente(Cliente cliente) {
 

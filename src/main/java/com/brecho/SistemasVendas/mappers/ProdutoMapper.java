@@ -5,6 +5,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class ProdutoMapper {
 
     public Produto convertDtoToEntity(ProdutoDto source) {
@@ -24,6 +25,7 @@ public class ProdutoMapper {
         if(source.getCategoria()!=null){
             produto.setCategoriaId(source.getCategoria().getId());
             produto.setNomeCategoria(source.getCategoria().getNome());
+
         }
         return produto;
 

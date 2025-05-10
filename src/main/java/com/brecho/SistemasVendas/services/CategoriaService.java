@@ -8,7 +8,9 @@ import com.brecho.SistemasVendas.repositories.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -40,6 +42,8 @@ public class CategoriaService {
                 .collect(toList());
     }
 
+
+    @Transactional
     public CategoriaDto create(CategoriaDto dto) {
         if (dto == null) {
             throw new AppException("Categoria informada está nula");
@@ -50,7 +54,7 @@ public class CategoriaService {
         var saved = categoriaRepository.save(entity);
         return mapper.convertEntityToDto(saved);
     }
-
+    @Transactional
     public CategoriaDto update(Long id, CategoriaDto dto) {
         if (id == null || dto == null) {
             throw new AppException("ID ou dados da categoria são nulos.");
@@ -63,7 +67,7 @@ public class CategoriaService {
         var updated = categoriaRepository.save(entity);
         return mapper.convertEntityToDto(updated);
     }
-
+    @Transactional
     public void delete(Long id) {
         log.info("Removendo categoria com ID: {}", id);
         findById(id);
