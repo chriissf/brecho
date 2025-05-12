@@ -1,8 +1,7 @@
 package com.brecho.SistemasVendas.controllers;
 
-import com.brecho.SistemasVendas.dtos.PagamentoDto;
+
 import com.brecho.SistemasVendas.dtos.VendaDto;
-import com.brecho.SistemasVendas.services.PagamentoService;
 import com.brecho.SistemasVendas.services.VendasService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

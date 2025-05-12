@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PagamentoController {
 
+
     private final PagamentoService service;
 
     @GetMapping

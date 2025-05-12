@@ -1,6 +1,6 @@
 package com.brecho.SistemasVendas.services;
 
-import com.brecho.SistemasVendas.dtos.ProdutoDto;
+
 import com.brecho.SistemasVendas.dtos.ProdutoVendaDto;
 import com.brecho.SistemasVendas.entities.ProdutoVenda;
 import com.brecho.SistemasVendas.helpers.AppException;

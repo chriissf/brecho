@@ -7,7 +7,6 @@ import com.brecho.SistemasVendas.mappers.PagamentoMapper;
 import com.brecho.SistemasVendas.repositories.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;

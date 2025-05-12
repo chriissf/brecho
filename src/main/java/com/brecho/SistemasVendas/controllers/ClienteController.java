@@ -6,6 +6,7 @@ import com.brecho.SistemasVendas.services.ClienteService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/clientes")
 @RequiredArgsConstructor // injeta dependência pelo construtor (boa prática)
 public class ClienteController {
+
 
     private final ClienteService service;
 

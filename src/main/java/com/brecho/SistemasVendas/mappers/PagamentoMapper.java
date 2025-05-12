@@ -5,7 +5,6 @@ import com.brecho.SistemasVendas.entities.Pagamento;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
 public class PagamentoMapper {

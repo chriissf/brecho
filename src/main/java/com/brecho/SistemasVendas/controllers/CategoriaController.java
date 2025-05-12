@@ -2,7 +2,6 @@ package com.brecho.SistemasVendas.controllers;
 
 
 import com.brecho.SistemasVendas.dtos.CategoriaDto;
-import com.brecho.SistemasVendas.helpers.AppException;
 import com.brecho.SistemasVendas.services.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

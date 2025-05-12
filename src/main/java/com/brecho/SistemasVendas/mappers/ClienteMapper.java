@@ -1,9 +1,7 @@
 package com.brecho.SistemasVendas.mappers;
 
 import com.brecho.SistemasVendas.dtos.ClienteDto;
-import com.brecho.SistemasVendas.dtos.PagamentoDto;
 import com.brecho.SistemasVendas.entities.Cliente;
-import com.brecho.SistemasVendas.entities.Pagamento;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

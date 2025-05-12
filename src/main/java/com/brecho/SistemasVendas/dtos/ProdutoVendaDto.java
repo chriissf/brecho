@@ -1,6 +1,6 @@
 package com.brecho.SistemasVendas.dtos;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,21 +12,26 @@ public class ProdutoVendaDto {
 
     private Long id;  // O ID é opcional em um DTO, mas pode ser útil para atualização
 
-    @NotNull(message = "Quantidade é obrigatória")
-    private int quantidade;  // Quantidade do produto
+    @NotNull(message = "A quantidade é obrigatória")
+    @Min(value = 1, message = "A quantidade deve ser no mínimo 1")
+    private int quantidade;
 
     @NotNull(message = "Cliente ID é obrigatório")
     private Long clienteId;  // Apenas o ID do cliente
 
-    private String nomeCliente;  // Nome do cliente, pode ser opcional dependendo da lógica
 
-    private String cpf;  // CPF do cliente
+    @Size(max = 100, message = "O nome do cliente deve ter no máximo 100 caracteres")
+    private String nomeCliente;
 
-    private Double desconto;  // Desconto aplicado na venda
+    @Pattern(regexp = "\\d{11}", message = "O CPF deve conter 11 dígitos numéricos")
+    private String cpf;
+
+    @DecimalMin(value = "0.0", inclusive = true, message = "O desconto não pode ser negativo")
+    private Double desconto;
 
     @NotNull(message = "Produto ID é obrigatório")
-    private Long produtoId;  // Apenas o ID do produto
+    private Long produtoId;
 
     @NotNull(message = "Venda ID é obrigatório")
-    private Long vendaId;  // Apenas o ID da venda
+    private Long vendaId;
 }

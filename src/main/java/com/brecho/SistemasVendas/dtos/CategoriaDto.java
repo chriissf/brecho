@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class CategoriaDto {
 
     private Long id;
-    @NotNull
+    @NotNull(message = "O nome da Categoria é obrigatorio! ")
     private String nome;
 }
