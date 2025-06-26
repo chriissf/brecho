@@ -15,6 +15,7 @@ target/
 
 ### IntelliJ IDEA ###
 .idea
+<<<<<<< HEAD
 *.iws
 *.iml
 *.ipr
@@ -31,3 +32,19 @@ build/
 
 ### VS Code ###
 .vscode/
+=======
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# Arquivos sensíveis
+src/main/resources/application.properties
+src/main/resources/application-dev.properties
+
+# Pasta de compilação
+/target/
+
