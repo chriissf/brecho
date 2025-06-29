@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastre-se | Brechó Vintage</title>
+    <style>
+        /* Estilos CSS mantidos do seu código */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f1e3d3, #dfd3c3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .cadastro-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            width: 420px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #5e412f;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            color: #5e412f;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+        }
+
+        .input-group .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 36px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #5e412f;
+            user-select: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6f4e37;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #5e3f2c;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .footer-text a {
+            color: #5e412f;
+            text-decoration: underline;
+        }
+
+        .error, .success {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+<div class="cadastro-container">
+    <h2>Cadastre-se no Brechó</h2>
+
+    <!-- Formulário de Cadastro -->
+    <form th:action="@{/cadastroUsuario}" th:object="${cadastro}" method="post">
+        <!-- Nome completo -->
+        <div class="input-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" th:field="*{nome}" required />
+            <div th:if="${#fields.hasErrors('nome')}" class="error" th:errors="*{nome}"></div>
+        </div>
+
+        <!-- Telefone -->
+        <div class="input-group">
+            <label for="telefone">Telefone</label>
+            <input type="text" id="telefone" th:field="*{telefone}" required />
+            <div th:if="${#fields.hasErrors('telefone')}" class="error" th:errors="*{telefone}"></div>
+        </div>
+
+        <!-- Data de Aniversário -->
+        <div class="input-group">
+            <label for="dataDeAniversario">Data de Aniversário</label>
+            <input type="date" id="dataDeAniversario" th:field="*{dataDeAniversario}" required />
+            <div th:if="${#fields.hasErrors('dataDeAniversario')}" class="error" th:errors="*{dataDeAniversario}"></div>
+        </div>
+
+        <!-- E-mail -->
+        <div class="input-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" th:field="*{email}" required />
+            <div th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></div>
+        </div>
+
+        <!-- Senha -->
+        <div class="input-group">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" th:field="*{senha}" required />
+            <div th:if="${#fields.hasErrors('senha')}" class="error" th:errors="*{senha}"></div>
+        </div>
+
+        <!-- Endereço -->
+        <div class="input-group">
+            <label for="endereco">Endereço</label>
+            <textarea id="endereco" th:field="*{endereco}" rows="3" required></textarea>
+            <div th:if="${#fields.hasErrors('endereco')}" class="error" th:errors="*{endereco}"></div>
+        </div>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <!-- Mensagens de erro/sucesso -->
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${success}" class="success" th:text="${success}"></div>
+
+    <!-- Link para página de login -->
+    <div class="footer-text">
+        Já tem conta? <a th:href="@{/login}">Entrar</a>
+    </div>
+</div>
+
+<script>
+    function toggleSenha() {
+        const senhaInput = document.getElementById("senha");
+        const toggleIcon = document.querySelector(".toggle-password");
+        const tipo = senhaInput.getAttribute("type");
+
+        if (tipo === "password") {
+            senhaInput.setAttribute("type", "text");
+            toggleIcon.textContent = "🙈"; // ícone alternativo
+        } else {
+            senhaInput.setAttribute("type", "password");
+            toggleIcon.textContent = "👁️";
+        }
+    }
+</script>
+
+</body>
+</html>
